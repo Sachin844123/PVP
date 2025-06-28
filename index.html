@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PVP eSport - Unleashing Fire in the Battlegrounds</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 2px solid #ff6b35;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Audiowide', cursive;
+            font-size: 2rem;
+            color: #ff6b35;
+            text-shadow: 0 0 20px #ff6b35;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect fill="%23000" width="1000" height="1000"/><circle cx="500" cy="500" r="300" fill="none" stroke="%23ff6b35" stroke-width="2" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Audiowide', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px #ff6b35;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 30px #ff6b35; }
+            to { text-shadow: 0 0 40px #ff6b35, 0 0 50px #ff6b35; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+        }
+
+        .btn-secondary:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-family: 'Audiowide', cursive;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ff6b35;
+            text-shadow: 0 0 20px #ff6b35;
+        }
+
+        /* Team Members */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .player-card {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .player-card:hover::before {
+            left: 100%;
+        }
+
+        .player-card:hover {
+            border-color: #ff6b35;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .player-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        /* Achievements */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid #ff6b35;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        /* Fund Section */
+        .fund-section {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 2px solid #ff6b35;
+        }
+
+        .fund-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .fund-amount {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fund-amount:hover, .fund-amount.selected {
+            background: #ff6b35;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .qr-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: white;
+            margin: 0 auto 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 0.8rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid #ff6b35;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ff6b35;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #333;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Social Media */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .fund-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            border: 2px solid #ff6b35;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">PVP eSport</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#highlights">Highlights</a></li>
+                <li><a href="#fund">Support Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>PVP eSport</h1>
+            <p>Unleashing Fire in the Battlegrounds – Meet Team Blaze!</p>
+            <div class="cta-buttons">
+                <a href="#team" class="btn">Meet The Team</a>
+                <a href="#fund" class="btn btn-secondary">Support Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
+        <h2>About PVP eSport</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">
+                Founded in 2024, PVP eSport emerged from a shared passion for Free Fire and competitive gaming. 
+                What started as a group of friends playing together has evolved into one of the most promising 
+                eSports teams in the region.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #cccccc;">
+                Our core values center around teamwork, strategic gameplay, and continuous growth. Based in India, 
+                we've been actively competing in the Free Fire eSports scene for over 2 years, constantly pushing 
+                the boundaries of what's possible in the battlegrounds.
+            </p>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="section">
+        <h2>Next Tournament</h2>
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">15</div>
+                <div>Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">08</div>
+                <div>Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">45</div>
+                <div>Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">23</div>
+                <div>Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section fade-in">
+        <h2>Meet Our Warriors</h2>
+        <div class="team-grid">
+            <div class="player-card">
+                <div class="player-avatar">
+                    <i class="fas fa-crosshairs"></i>
+                </div>
+                <h3>BlazeMaster</h3>
+                <p><strong>Role:</strong> Team Captain ("IGL") & Sniper</p>
+                <p><strong>Real Name:</strong> Parth Jadhav,Pritam Jadhav</p>
+                <p>The strategic mind behind our victories. Expert marksman with over 2000+ ranked matches.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="player-card">
+                <div class="player-avatar">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3>RushKing</h3>
+                <p><strong>Role:</strong> Rusher</p>
+                <p><strong>Real Name:</strong> Ashish ,Amey,Sachin</p>
+                <p>Lightning-fast reflexes and aggressive gameplay. Known for clutch moments in critical situations.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="player-card">
+                <div class="player-avatar">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Assulter</h3>
+                <p><strong>Role:</strong> Assulter & Support</p>
+                <p><strong>Real Name:</strong> Amey, Ashish , Bhupesh </p>
+                <p>The backbone of our team. Excellent game sense and tactical awareness that guides our strategies.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="player-card">
+                <div class="player-avatar">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>Secondary Rusher / Suppoter</h3>
+                <p><strong>Role:</strong> Fragger</p>
+                <p><strong>Real Name:</strong> Omyaa , Sachin , Bhupesh</p>
+                <p>High-damage dealer with exceptional positioning. Always ready to turn the tide of battle.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section fade-in">
+        <h2>Hall of Fame</h2>
+        <div class="achievement-grid">
+            <div class="achievement-card">
+                <h3><i class="fas fa-trophy" style="color: #FFD700;"></i> Regional Championship 2025</h3>
+                <p><strong>1st Place</strong> - Free Fire India Regional Tournament</p>
+                <p>Prize: ₹2,50,000</p>
+            </div>
+            
+            <div class="achievement-card">
+                <h3><i class="fas fa-medal" style="color: #C0C0C0;"></i> State Championship 2025</h3>
+                <p><strong>2nd Place</strong> - Maharashtra Free Fire Championship</p>
+                <p>Prize: ₹1,00,000</p>
+            </div>
+            
+            <div class="achievement-card">
+                <h3><i class="fas fa-award" style="color: #CD7F32;"></i> City League 2025</h3>
+                <p><strong>3rd Place</strong> - Mumbai Free Fire League</p>
+                <p>Prize: ₹50,000</p>
+            </div>
+            
+            <div class="achievement-card">
+                <h3><i class="fas fa-star" style="color: #ff6b35;"></i> Qualifier Round 2025</h3>
+                <p><strong>Top 10</strong> - National Free Fire Championship Qualifier</p>
+                <p>Qualified for Nationals</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section id="highlights" class="section fade-in">
+        <h2>Epic Moments</h2>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <p>Check out our best plays and memorable moments from recent tournaments!</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="background: linear-gradient(145deg, #1a1a2e, #16213e); border-radius: 15px; padding: 1.5rem; border: 2px solid #ff6b35;">
+                <h3>Championship Winning Moment</h3>
+                <div style="background: #333; height: 200px; border-radius: 10px; margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
+                    <i class="fab fa-youtube" style="font-size: 3rem; color: #ff6b35;"></i>
+                </div>
+                <p>The final circle clutch that won us the Regional Championship 2024!</p>
+                <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">Watch on YouTube</a>
+            </div>
+            
+            <div style="background: linear-gradient(145deg, #1a1a2e, #16213e); border-radius: 15px; padding: 1.5rem; border: 2px solid #ff6b35;">
+                <h3>Team Coordination</h3>
+                <div style="background: #333; height: 200px; border-radius: 10px; margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
+                    <i class="fab fa-youtube" style="font-size: 3rem; color: #ff6b35;"></i>
+                </div>
+                <p>Perfect teamwork and strategy execution in State Championship.</p>
+                <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">Watch on YouTube</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fund Section -->
+    <section id="fund" class="section fade-in">
+        <div class="fund-section">
+            <h2><i class="fas fa-heart" style="color: #ff6b35;"></i> Support PVP eSport</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+                Help us compete in bigger tournaments and upgrade our gaming setup! 
+                Your support means everything to our team's journey.
+            </p>
+            
+            <div class="fund-options">
+                <div class="fund-amount" data-amount="100">
+                    <h3>₹100</h3>
+                    <p>Fan Support</p>
+                </div>
+                <div class="fund-amount" data-amount="500">
+                    <h3>₹500</h3>
+                    <p>Team Supporter</p>
+                </div>
+                <div class="fund-amount" data-amount="1000">
+                    <h3>₹1000</h3>
+                    <p>Gaming Gear</p>
+                </div>
+                <div class="fund-amount" data-amount="2500">
+                    <h3>₹2500</h3>
+                    <p>Tournament Entry</p>
+                </div>
+                <div class="fund-amount" data-amount="custom">
+                    <h3>Custom</h3>
+                    <p>Your Choice</p>
+                </div>
+            </div>
+
+            <div style="margin: 2rem 0;">
+                <input type="number" id="customAmount" placeholder="Enter custom amount" 
+                       style="display: none; width: 200px; margin: 0 auto;">
+            </div>
+
+            <button class="btn" onclick="generateQR()" style="font-size: 1.2rem; padding: 1rem 3rem;">
+                <i class="fas fa-qrcode"></i> Generate UPI QR Code
+            </button>
+
+            <div class="qr-section" id="qrSection">
+                <h3>Scan to Pay via UPI</h3>
+                <div class="qr-code" id="qrCode">
+                    QR Code will appear here 
+                </div>
+                <p><strong>UPI ID:</strong> <span id="displayUPI">teamleader@paytm</span></p>
+                <p><strong>Amount:</strong> ₹<span id="displayAmount">0</span></p>
+                <p style="color: #ff6b35; margin-top: 1rem;">
+                    <i class="fas fa-info-circle"></i> 
+                    Screenshot this QR code and scan with any UPI app
+                </p>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button class="btn btn-secondary" onclick="openLeaderModal()">
+                    <i class="fas fa-cog"></i> Update Leader UPI (Admin Only)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+        <h2>Get In Touch</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: start;">
+            <div>
+                <h3 style="color: #ff6b35; margin-bottom: 1rem;">Contact Information</h3>
+                <p><i class="fas fa-envelope"></i> pvpesport.team@gmail.com</p>
+                <p><i class="fab fa-discord"></i> PVP eSport#1234</p>
+                <p><i class="fas fa-map-marker-alt"></i> Thane, Maharashtra, India</p>
+                
+                <div class="social-links" style="justify-content: flex-start; margin-top: 2rem;">
+                    <a href="https://www.instagram.com/pvp_esports.17?igsh=d20yY3JndXd0b2tz"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://link.parallelgame.com/LpXjeE61A1k2Mehs9"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <form style="background: linear-gradient(145deg, #1a1a2e, #16213e); padding: 2rem; border-radius: 15px; border: 2px solid #ff6b35;">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select>
+                            <option>General Inquiry</option>
+                            <option>Sponsorship</option>
+                            <option>Collaboration</option>
+                            <option>Media Request</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #0a0a0a; padding: 2rem; text-align: center; border-top: 2px solid #ff6b35;">
+        <p>&copy; 2024 PVP eSport. All rights reserved. Built with passion for Free Fire eSports.</p>
+    </footer>
+
+    <!-- Leader UPI Modal -->
+    <div id="leaderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLeaderModal()">&times;</span>
+            <h2>Update Team Leader UPI</h2>
+            <div class="form-group">
+                <label>Current QR Code</label>
+                <div style="text-align: center; margin: 1rem 0;">
+                    <div class="qr-code" style="margin: 0 auto;" id="currentQR">
+                        Current QR
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>New UPI ID</label>
+                <input type="text" id="newUPI" placeholder="example@paytm">
+            </div>
+            <div class="form-group">
+                <label>Upload New QR Code Image</label>
+                <input type="file" id="qrUpload" accept="image/*">
+            </div>
+            <div style="text-align: center;">
+                <button class="btn" onclick="updateLeaderUPI()">Update UPI Details</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let selectedAmount = 0;
+        let leaderUPI = '7738977737';
+        let leaderQRCode = null;
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fund amount selection
+        document.querySelectorAll('.fund-amount').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                document.querySelectorAll('.fund-amount').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                const amount = this.getAttribute('data-amount');
+                const customInput = document.getElementById('customAmount');
+                
+                if (amount === 'custom') {
+                    customInput.style.display = 'block';
+                    customInput.focus();
+                    selectedAmount = 0;
+                } else {
+                    customInput.style.display = 'none';
+                    selectedAmount = parseInt(amount);
+                }
+            });
+        });
+
+        // Custom amount input
+        document.getElementById('customAmount').addEventListener('input', function() {
+            selectedAmount = parseInt(this.value) || 0;
+        });
+
+        // Generate QR Code function
+        function generateQR() {
+            if (selectedAmount === 0) {
+                alert('Please select an amount first!');
+                return;
+            }
+
+            const qrSection = document.getElementById('qrSection');
+            const qrCode = document.getElementById('qrCode');
+            const displayUPI = document.getElementById('displayUPI');
+            const displayAmount = document.getElementById('displayAmount');
+
+            // Update display
+            displayUPI.textContent = leaderUPI;
+            displayAmount.textContent = selectedAmount;
+
+            // Generate UPI payment URL
+            const upiURL = `upi://pay?pa=${leaderUPI}&pn=PVP eSport Team&am=${selectedAmount}&cu=INR&tn=Support PVP eSport Team`;
+            
+            // For demo purposes, show a placeholder QR code
+            // In real implementation, you would use a QR code library
+            qrCode.innerHTML = `
+                <div style="font-size: 12px; padding: 10px; line-height: 1.2;">
+                    <div style="margin-bottom: 10px; font-weight: bold;">UPI QR CODE</div>
+                    <div>UPI ID: ${leaderUPI}</div>
+                    <div>Amount: ₹${selectedAmount}</div>
+                    <div style="margin-top: 10px; font-size: 10px;">
+                        Scan with any UPI app<br>
+                        (Paytm, PhonePe, GPay, etc.)
+                    </div>
+                </div>
+            `;
+
+            qrSection.style.display = 'block';
+            qrSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Leader modal functions
+        function openLeaderModal() {
+            const modal = document.getElementById('leaderModal');
+            const currentQR = document.getElementById('currentQR');
+            
+            currentQR.innerHTML = `
+                <div style="font-size: 12px; padding: 10px;">
+                    <div>Current UPI: ${leaderUPI}</div>
+                    <div style="margin-top: 10px;">Current QR Code</div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeLeaderModal() {
+            document.getElementById('leaderModal').style.display = 'none';
+        }
+
+        function updateLeaderUPI() {
+            const newUPI = document.getElementById('newUPI').value;
+            const qrUpload = document.getElementById('qrUpload').files[0];
+
+            if (newUPI) {
+                leaderUPI = newUPI;
+                alert('UPI ID updated successfully!');
+            }
+
+            if (qrUpload) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    leaderQRCode = e.target.result;
+                    alert('QR Code image uploaded successfully!');
+                };
+                reader.readAsDataURL(qrUpload);
+            }
+
+            closeLeaderModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('leaderModal');
+            if (event.target === modal) {
+                closeLeaderModal();
+            }
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            // Set target date (example: 15 days from now)
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 15);
+            targetDate.setHours(12, 0, 0, 0); // Set to noon
+
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                document.querySelector('.countdown').innerHTML = '<h3>Tournament Started!</h3>';
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.player-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) rotateY(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotateY(0)';
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // Add particle effect to hero section
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '2px';
+            particle.style.height = '2px';
+            particle.style.background = '#ff6b35';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.opacity = '0.6';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            particle.style.zIndex = '1';
+
+            document.querySelector('.hero').appendChild(particle);
+
+            const animation = particle.animate([
+                { transform: 'translateY(0) scale(0)', opacity: 0.6 },
+                { transform: 'translateY(-100vh) scale(1)', opacity: 0 }
+            ], {
+                duration: 3000 + Math.random() * 2000,
+                easing: 'linear'
+            });
+
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Initialize animations
+        setTimeout(() => {
+            document.querySelectorAll('.fade-in').forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.animationDelay = index * 0.1 + 's';
+                }, index * 100);
+            });
+        }, 100);
+
+        console.log('PVP eSport website loaded successfully! 🔥');
+    </script>
+</body>
+</html>
